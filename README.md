@@ -1,4 +1,13 @@
-mokdoc-view
-===========
+##mokdocÎÄµµÕ¹Ê¾°ü
 
-mokdocæ–‡æ¡£å±•ç¤ºåŒ…
+ÅäÖÃmokdoc£¬½«ÎÄµµ±£´æÂ·¾¶Ö¸µ½ÕâÀï£¬´Ó´úÂëÀïÌáÈ¡×¢ÊÍºó£¬mokdoc±ã»á½«ÎÄµµÊý¾ÝºÍ´úÂëÉú³Éµ½ÕâÀï£¬¼´¿É²éÔÄÎÄµµ¡£
+
+##Ê¹ÓÃ·½·¨
+
+* ÓÃ Chrome »ò Firefox ä¯ÀÀÆ÷´ò¿ª index.html ¿ªÊ¼Ê¹ÓÃÎÄµµ¡£
+
+* Èç¹ûÒªÌá¹©ÎÄµµÏÂÔØ¹¦ÄÜ£¬ÇëÌáÈ¡×¢ÊÍÊý¾Ýºó£¬½«±¾ÎÄ¼þ¼ÐÄÚËùÓÐ¶«¶«£¨°üÀ¨Êý¾ÝÎÄ¼þ¼ÐdataºÍ´úÂëÎÄ¼þ¼Ðcode£©Ò»Æð´ò°ü³Édoc.zip£¬Ò²ÊÇ´æ·ÅÔÚ±¾ÎÄ¼þ¼ÐÀï¡£
+
+* Ã¿´ÎÉú³ÉÎÄµµºó£¬ÇëÐÞ¸Ä CONF.js ÀïµÄ°æ±¾ºÅ£¬ÒÔÈ·±£ÎÄµµÊý¾ÝµÄ¼°Ê±¸üÐÂ¡£
+
+##Version: 1.0.0
