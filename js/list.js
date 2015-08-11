@@ -32,7 +32,7 @@
 					html += '<br/><br/>';
 					l = item.charAt(0).toLowerCase();
 				}
-				html += '<a href="detail.html?type=0&id='+item+'" title="' +
+				html += '<a href="detail.html?id='+item+'" title="' +
 					descs[item]+'">'+ item +'</a>';
 			}
 
@@ -52,7 +52,7 @@
 			list.sort(); //排序
 			for(i = 0, len = list.length; i < len; i++){ //生成html
 				item = list[i];
-				html += '<li>▪ <a href="detail.html?type=0&id='+item+'" title="' +
+				html += '<li>▪ <a href="detail.html?id='+item+'" title="' +
 					descs[item]+'">'+ item +'</a> : '+ descs[item] +'</li>';
 			}
 

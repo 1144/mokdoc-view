@@ -64,8 +64,9 @@
 						'<dt>'+
 							//TYPES[info.type]+'<a href="javascript:;" data-index="' +
 							//info.i+'" data-type="'+info.type+'" cpo-name="show-detail">'+id+
-							TYPES[info.type]+'<a href="detail.html?type='+info.type+
-								'&id='+(item.id || item.f)+'">'+id+'</a>'+
+							TYPES[info.type]+'<a href="detail.html?'+
+								(info.type===0 ? '' : 'type='+info.type+'&')+
+								'id='+(item.id || item.f)+'">'+id+'</a>'+
 						'</dt>' +
 						'<dd>'+
 							desc.replace(reg_kw, function (m) {return '<em>'+m+'</em>'})+

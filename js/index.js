@@ -168,7 +168,7 @@
 
 	//渲染主内容区的列表
 	~function () {
-		var tpl = '<tr><td><a href="detail.html?type=0&id={0}">{0}</a></td><td>{1}</td></tr>';
+		var tpl = '<tr><td><a href="detail.html?id={0}">{0}</a></td><td>{1}</td></tr>';
 		var reg_id = /^\w+$/, reg_htmltag = /<.*?>/g;
 		var ids = [], id2desc = {}, html = '',
 			i, len, item, id;

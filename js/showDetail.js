@@ -2,11 +2,13 @@
 	var REP = {'  ':'　', '\t':'　　', '\n':'<br/>', '<':'&lt;', '>':'&gt;'};
 	var TAG = {'class':'类', 'static':'静态方法', 'private':'私有属性', 'file':'文件注释'};
 	var DETAIL = window.location.href;
-	DETAIL = DETAIL.slice(0, DETAIL.lastIndexOf('/')+1)+'detail.html?type=';
+	DETAIL = DETAIL.slice(0, DETAIL.lastIndexOf('/')+1)+'detail.html?';
 
 	var reg_url = /['"]?https?:\/\/[\w-.\/?=&%#]+/g;
-	var replaceURL = function(text){
-		return String(text).replace(reg_url, function($0){return $0.charAt(0)==='h'?'<a href="'+$0+'" target="_blank">'+$0+'</a>':$0});
+	var renderText = function (text) {
+		return String(text).replace(reg_url, function ($0) {
+			return $0.charAt(0)==='h' ? '<a href="'+$0+'" target="_blank">'+$0+'</a>' : $0;
+		}).replace(/`(.+?)`/g, '<cs>$1</cs>');
 	};
 
 	doc.renderComment = function(item, pre){
@@ -26,7 +28,7 @@
 				htm += '<tr><td class="pn">' + p.name + '</td><td>' +
 					p.type + '</td><td>'+
 						(p.opt ? '可选'+(p.val?'，默认值：'+p.val:'')+'。' : '')+
-					replaceURL(p.desc) + '</td></tr>';
+					renderText(p.desc) + '</td></tr>';
 			}
 			htm += '</table></dd>';
 			html += '<arg>('+arg.join(', ')+')</arg>';
@@ -40,11 +42,11 @@
 		}
 		pre || (html += '<span><a title="所在文件" href="code/'+item.f+CONF.version+
 			'" target="_blank">'+item.f+'</a></span></dt>');
-		html += '<dd class="desc">'+replaceURL(item.desc)+'</dd>' + htm;
+		html += '<dd class="desc">'+renderText(item.desc)+'</dd>' + htm;
 		if(item.note){
 			html += '<dd class="tit">提示：</dd><dd class="cont"><ul>';
 			for(j = 0, n = item.note.length; j < n; j++){
-				html += '<li>▪ '+ replaceURL(item.note[j]) + '</li>';
+				html += '<li>▪ '+ renderText(item.note[j]) + '</li>';
 			}
 			html += '</ul></dd>';
 		}
@@ -59,7 +61,7 @@
 					html += '<li>▪ <a target="_blank" href="detail.html?type='+rel.charAt(1)+'&id='+
 						encodeURIComponent(rid)+'">'+ rid +'</a> '+ rel.slice(m+1) +'</li>';
 				}else{
-					html += '<li>▪ '+ replaceURL(rel) +'</li>';
+					html += '<li>▪ '+ renderText(rel) +'</li>';
 				}
 			}
 			html += '</ul></dd>';
@@ -87,12 +89,12 @@
 		var id = item.id;
 		var html = '<dl><dt>[字典] <id>'+id+'</id><span><a title="所在文件" href="code/'+item.f+CONF.version+
 			'" target="_blank">'+item.f+'</a></span></dt><dd class="desc">'+
-			replaceURL(item.desc)+'</dd><dd class="tit">字典值表：</dd><dd class="cont"><table>'+
+			renderText(item.desc)+'</dd><dd class="tit">字典值表：</dd><dd class="cont"><table>'+
 			'<tr class="pth"><td>值</td><td>描述</td><td>所在文件</td></tr>';
 		var j, n, values = DICT_CONTENT[id] || [];
 		for(j = 0, n = values.length; j < n; j++){
 			html += '<tr><td class="pn">'+ values[j].val +'</td><td>' +
-				replaceURL(values[j].desc) +'</td><td><a href="code/'+
+				renderText(values[j].desc) +'</td><td><a href="code/'+
 				values[j].f+CONF.version+'" target="_blank">'+ values[j].f +'</a></td></tr>';
 		}
 		return html+'</table></dd></dl>';
@@ -102,11 +104,11 @@
 		var j, n, htm = '';
 		var html = '<dl><dt><id>'+ item.id +'</id><span><a title="所在文件" href="code/'+item.f+CONF.version+
 			'" target="_blank">'+item.f+'</a></span></dt>'+
-			'<dd class="desc">'+replaceURL(item.desc)+'</dd>';
+			'<dd class="desc">'+renderText(item.desc)+'</dd>';
 		if(item.note){
 			html += '<dd class="tit">提示：</dd><dd class="cont"><ul>';
 			for(j = 0, n = item.note.length; j < n; j++){
-				html += '<li>▪ '+ replaceURL(item.note[j]) + '</li>';
+				html += '<li>▪ '+ renderText(item.note[j]) + '</li>';
 			}
 			html += '</ul></dd>';
 		}
@@ -121,7 +123,7 @@
 					html += '<li>▪ <a target="_blank" href="detail.html?type='+rel.charAt(1)+'&id='+
 						encodeURIComponent(rid)+'">'+ rid +'</a> '+ rel.slice(m+1) +'</li>';
 				}else{
-					html += '<li>▪ '+ replaceURL(rel) +'</li>';
+					html += '<li>▪ '+ renderText(rel) +'</li>';
 				}
 			}
 			html += '</ul></dd>';
@@ -200,8 +202,8 @@
 		}
 		if (item.id) {
 			html += '<p class="addr">文档地址：<input title="可以复制给小伙伴~" '+
-				'size="80" type="text" onclick="this.select();" value="'+
-				DETAIL+type+'&id='+encodeURIComponent(item.id)+'" /></p>';
+				'size="80" type="text" onclick="this.select();" value="'+DETAIL+
+				(type===0 ? '' : 'type='+type+'&')+'id='+encodeURIComponent(item.id)+'" /></p>';
 		}
 		$('#detail').html(html);
 
