@@ -52,14 +52,16 @@
 		}
 		if(item.rel){
 			html += '<dd class="tit">相关：</dd><dd class="cont"><ul>';
-			var rel, m, rid; //rel的格式：[type,id] 描述
+			var rel, m, type, rid; //rel的格式：[type,id] 描述
 			for(j = 0, n = item.rel.length; j < n; j++){
 				rel = item.rel[j];
 				m = rel.indexOf(']');
 				if(m>0 && rel.charAt(0)==='[' && /\d/.test(rel.charAt(1))){
-					rid = $.trim( rel.slice(3, m) );
-					html += '<li>▪ <a target="_blank" href="detail.html?type='+rel.charAt(1)+'&id='+
-						encodeURIComponent(rid)+'">'+ rid +'</a> '+ rel.slice(m+1) +'</li>';
+					type = rel.charAt(1);
+					rid = $.trim(rel.slice(3, m));
+					html += '<li>▪ <a target="_blank" href="detail.html?'+
+						(type==='0' ? '' : 'type='+type+'&')+'id='+encodeURIComponent(rid)+'">'+
+						rid +'</a> '+ rel.slice(m+1) +'</li>';
 				}else{
 					html += '<li>▪ '+ renderText(rel) +'</li>';
 				}
@@ -114,14 +116,16 @@
 		}
 		if(item.rel){
 			html += '<dd class="tit">相关：</dd><dd class="cont"><ul>';
-			var rel, m, rid; //rel的格式：[type,id] 描述
+			var rel, m, type, rid; //rel的格式：[type,id] 描述
 			for(j = 0, n = item.rel.length; j < n; j++){
 				rel = item.rel[j];
 				m = rel.indexOf(']');
 				if(m>0 && rel.charAt(0)==='[' && /\d/.test(rel.charAt(1))){
-					rid = $.trim( rel.slice(3, m) );
-					html += '<li>▪ <a target="_blank" href="detail.html?type='+rel.charAt(1)+'&id='+
-						encodeURIComponent(rid)+'">'+ rid +'</a> '+ rel.slice(m+1) +'</li>';
+					type = rel.charAt(1);
+					rid = $.trim(rel.slice(3, m));
+					html += '<li>▪ <a target="_blank" href="detail.html?'+
+						(type==='0' ? '' : 'type='+type+'&')+'id='+encodeURIComponent(rid)+'">'+
+						rid +'</a> '+ rel.slice(m+1) +'</li>';
 				}else{
 					html += '<li>▪ '+ renderText(rel) +'</li>';
 				}
