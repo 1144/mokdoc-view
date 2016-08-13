@@ -151,7 +151,7 @@
 	//展示数据
 	//item 单条注释数据。type=0时，item可能是一个id
 	//type 0 评论，1 数据字典，2 知识库
-	doc.showDetail = function(item, type){
+	doc.showDetail = function(item, type, f){
 		var html;
 		if (type===0) {
 			var src = ALL_COMMENTS, len = src.length, i, id;
@@ -166,7 +166,7 @@
 					}
 				} else {
 					for (i = 0; i < len; i++) {
-						if (src[i].id===id) {
+						if (src[i].id===id && src[i].f===f) {
 							item = src[i];
 							break;
 						}
@@ -207,11 +207,12 @@
 		if (item.id) {
 			html += '<p class="addr">文档地址：<input title="可以复制给小伙伴~" '+
 				'size="80" type="text" onclick="this.select();" value="'+DETAIL+
-				(type===0 ? '' : 'type='+type+'&')+'id='+encodeURIComponent(item.id)+'" /></p>';
+				(type===0 ? '' : 'type='+type+'&')+'id='+encodeURIComponent(item.id)+
+				(item._rid ? '&f='+encodeURIComponent(item.f) : '')+'" /></p>';
 		}
 		$('#detail').html(html);
 
-		type<2 && doc.addHistory(item.id, type);
+		type<2 && doc.addHistory(item._rid ? item.id+'|'+item.f : item.id, type);
 	};
 
 	doc.addHistory = function (id, type) {

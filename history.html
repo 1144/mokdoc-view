@@ -77,12 +77,17 @@
 		var hist = Cookie.get('hist');
 		if(hist){
 			hist = hist.split(',');
-			var i = hist.length, item, html = '', j = 1;
+			var i = hist.length, item, qs, html = '', j = 1;
 			while(i--){
 				item = hist[i].slice(1);
-				//html += '<a data-id="'+ item +'" data-type="'+ hist[i].charAt(0) +
-				//	'" href="javascript:;" cpo-name="show-detail">'+ item +'</a>';
-				html += '<a href="detail.html?type='+hist[i].charAt(0)+'&id='+item+'">'+item+'</a>';
+				if (item.indexOf('|')>0) {
+					qs = item.split('|');
+					qs = '&id='+encodeURIComponent(qs[0])+
+						'&f='+encodeURIComponent(qs[1]);
+				} else {
+					qs = '&id='+encodeURIComponent(item);
+				}
+				html += '<a href="detail.html?type='+hist[i].charAt(0)+qs+'">'+item+'</a>';
 				j%5===0 && (html += '<br/>');
 				j++;
 			}
